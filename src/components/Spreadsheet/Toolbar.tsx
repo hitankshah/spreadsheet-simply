@@ -10,7 +10,7 @@ import {
   Hash,
   Scissors,
   Type,
-  TypeStrikethrough,
+  Strikethrough,
   Replace
 } from "lucide-react";
 import {
@@ -110,7 +110,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({ onFunction }) => {
           size="sm"
           onClick={() => handleFunction('LOWER')}
         >
-          <TypeStrikethrough className="w-4 h-4 mr-1" />
+          <Strikethrough className="w-4 h-4 mr-1" />
           LOWER
         </Button>
         <Dialog>
