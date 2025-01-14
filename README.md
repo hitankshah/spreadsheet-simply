@@ -1,69 +1,190 @@
-# Welcome to your Lovable project
+Vite React ShadCN TS Project
 
-## Project info
+Welcome to the Vite React ShadCN TS project! This repository contains a modern front-end setup using Vite, React, TypeScript, and a collection of essential libraries and tools to build robust applications.
 
-**URL**: https://lovable.dev/projects/d022ec3b-a016-4a30-9fa2-7f4d8ca29285
+Project Overview
 
-## How can I edit this code?
+This project serves as a foundation for building scalable and performant web applications. It leverages Vite for fast development and build processes, React for building user interfaces, and TypeScript for type safety.
 
-There are several ways of editing your application.
+Features
 
-**Use Lovable**
+Vite: Fast build tool and development server.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/d022ec3b-a016-4a30-9fa2-7f4d8ca29285) and start prompting.
+React: A library for building user interfaces.
 
-Changes made via Lovable will be committed automatically to this repo.
+TypeScript: Adds type safety to JavaScript.
 
-**Use your preferred IDE**
+Radix UI: Accessible, unstyled UI components.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Tailwind CSS: Utility-first CSS framework for styling.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+ESLint: Linter for code quality.
 
-Follow these steps:
+React Query: Data fetching and state management.
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+Getting Started
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+Prerequisites
 
-# Step 3: Install the necessary dependencies.
-npm i
+Node.js v14 or higher
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+npm or yarn
+
+Installation
+
+Clone the repository:
+
+git clone[ https://github.com/hitankshah/sheetify-simulate.git
+](https://github.com/hitankshah/spreadsheet-simply.git)
+Navigate to the project directory:
+
+cd sheetify-simulate
+
+Install dependencies:
+
+npm install
+# or
+yarn install
+
+Running the Project
+
+Development Server:
+
 npm run dev
-```
+# or
+yarn dev
 
-**Edit a file directly in GitHub**
+The development server will start, and you can view the application at http://localhost:3000.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Build for Production:
 
-**Use GitHub Codespaces**
+npm run build
+# or
+yarn build
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Preview Production Build:
 
-## What technologies are used for this project?
+npm run preview
+# or
+yarn preview
 
-This project is built with .
+Linting
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+To lint the codebase, run:
 
-## How can I deploy this project?
+npm run lint
+# or
+yarn lint
 
-Simply open [Lovable](https://lovable.dev/projects/d022ec3b-a016-4a30-9fa2-7f4d8ca29285) and click on Share -> Publish.
+Scripts
 
-## I want to use a custom domain - is that possible?
+dev: Start the development server using Vite.
 
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+build: Build the application for production.
+
+build:dev: Build the application in development mode.
+
+lint: Run ESLint on the codebase.
+
+preview: Preview the production build.
+
+Dependencies
+
+Core Dependencies
+
+@hookform/resolvers
+
+@radix-ui/react-*
+
+@tanstack/react-query
+
+class-variance-authority
+
+clsx
+
+cmdk
+
+date-fns
+
+embla-carousel-react
+
+input-otp
+
+lucide-react
+
+next-themes
+
+react
+
+react-day-picker
+
+react-dom
+
+react-hook-form
+
+react-resizable-panels
+
+react-router-dom
+
+recharts
+
+sonner
+
+tailwind-merge
+
+tailwindcss-animate
+
+vaul
+
+zod
+
+Dev Dependencies
+
+@eslint/js
+
+@tailwindcss/typography
+
+@types/node
+
+@types/react
+
+@types/react-dom
+
+@vitejs/plugin-react-swc
+
+autoprefixer
+
+eslint
+
+eslint-plugin-react-hooks
+
+eslint-plugin-react-refresh
+
+globals
+
+lovable-tagger
+
+postcss
+
+tailwindcss
+
+typescript
+
+typescript-eslint
+
+vite
+
+License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+Contributing
+
+Contributions are welcome! Please fork the repository and submit a pull request with your changes.
+
+Contact
+
+For any inquiries, please contact Hitank Shah at [your email address].
+
+Thank you for using this template! Happy coding!
+
