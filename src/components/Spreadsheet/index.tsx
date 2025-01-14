@@ -1,9 +1,11 @@
 import React, { useState, useRef } from 'react';
 import { generateColumnLabel, evaluateFormula } from '@/lib/spreadsheet-utils';
+import * as spreadsheetFunctions from '@/lib/spreadsheet-functions';
 import { Button } from '@/components/ui/button';
 import { Bold, Italic, AlignLeft, AlignCenter, AlignRight, Save, Upload, Type, Palette } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import { ColorStack, ColorState } from '@/lib/ColorStack';
+import { Toolbar } from './Toolbar';
 import {
   Select,
   SelectContent,
@@ -37,6 +39,7 @@ const fontColors = ['#000000', '#FF0000', '#00FF00', '#0000FF', '#FF00FF', '#00F
 const Spreadsheet = () => {
   const [cells, setCells] = useState<Record<string, CellData>>({});
   const [selectedCell, setSelectedCell] = useState<string>('');
+  const [selectedRange, setSelectedRange] = useState<string[]>([]);
   const [formulaBarValue, setFormulaBarValue] = useState('');
   const gridRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
@@ -93,99 +96,69 @@ const Spreadsheet = () => {
     }
   };
 
+  const handleFunction = (type: string, params?: any) => {
+    if (!selectedCell && selectedRange.length === 0) {
+      toast({
+        title: "Error",
+        description: "Please select a cell or range first",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const values = selectedRange.map(ref => cells[ref]?.value || '');
+    let result: string | number = '';
+
+    switch (type) {
+      case 'SUM':
+        result = spreadsheetFunctions.calculateSum(values);
+        break;
+      case 'AVERAGE':
+        result = spreadsheetFunctions.calculateAverage(values);
+        break;
+      case 'MAX':
+        result = spreadsheetFunctions.findMax(values);
+        break;
+      case 'MIN':
+        result = spreadsheetFunctions.findMin(values);
+        break;
+      case 'COUNT':
+        result = spreadsheetFunctions.count(values);
+        break;
+      case 'TRIM':
+        if (selectedCell) {
+          result = spreadsheetFunctions.trim(cells[selectedCell]?.value || '');
+        }
+        break;
+      case 'UPPER':
+        if (selectedCell) {
+          result = spreadsheetFunctions.upper(cells[selectedCell]?.value || '');
+        }
+        break;
+      case 'LOWER':
+        if (selectedCell) {
+          result = spreadsheetFunctions.lower(cells[selectedCell]?.value || '');
+        }
+        break;
+      case 'FIND_REPLACE':
+        if (params?.find && params?.replace) {
+          const newValues = spreadsheetFunctions.findAndReplace(values, params.find, params.replace);
+          selectedRange.forEach((ref, index) => {
+            handleCellChange(ref, newValues[index]);
+          });
+          return;
+        }
+        break;
+    }
+
+    if (selectedCell && result !== '') {
+      handleCellChange(selectedCell, String(result));
+    }
+  };
+
   return (
     <div className="flex flex-col h-screen">
-      <div className="toolbar flex items-center gap-2 p-2 border-b">
-        <Button
-          variant="outline"
-          size="icon"
-          onClick={() => updateCellStyle(selectedCell, { bold: !cells[selectedCell]?.style?.bold })}
-        >
-          <Bold className="h-4 w-4" />
-        </Button>
-        <Button
-          variant="outline"
-          size="icon"
-          onClick={() => updateCellStyle(selectedCell, { italic: !cells[selectedCell]?.style?.italic })}
-        >
-          <Italic className="h-4 w-4" />
-        </Button>
-        <Button
-          variant="outline"
-          size="icon"
-          onClick={() => updateCellStyle(selectedCell, { align: 'left' })}
-        >
-          <AlignLeft className="h-4 w-4" />
-        </Button>
-        <Button
-          variant="outline"
-          size="icon"
-          onClick={() => updateCellStyle(selectedCell, { align: 'center' })}
-        >
-          <AlignCenter className="h-4 w-4" />
-        </Button>
-        <Button
-          variant="outline"
-          size="icon"
-          onClick={() => updateCellStyle(selectedCell, { align: 'right' })}
-        >
-          <AlignRight className="h-4 w-4" />
-        </Button>
-        
-        <Select
-          value={cells[selectedCell]?.style?.fontSize || '14px'}
-          onValueChange={(value) => updateCellStyle(selectedCell, { fontSize: value })}
-        >
-          <SelectTrigger className="w-[100px]">
-            <Type className="h-4 w-4 mr-2" />
-            <SelectValue placeholder="Font Size" />
-          </SelectTrigger>
-          <SelectContent>
-            {fontSizes.map(size => (
-              <SelectItem key={size} value={size}>
-                {size}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-
-        <Select
-          value={cells[selectedCell]?.style?.fontFamily || 'Arial'}
-          onValueChange={(value) => updateCellStyle(selectedCell, { fontFamily: value })}
-        >
-          <SelectTrigger className="w-[150px]">
-            <SelectValue placeholder="Font Family" />
-          </SelectTrigger>
-          <SelectContent>
-            {fontFamilies.map(font => (
-              <SelectItem key={font} value={font}>
-                {font}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-
-        <Select
-          value={cells[selectedCell]?.style?.color || '#000000'}
-          onValueChange={(value) => updateCellStyle(selectedCell, { color: value })}
-        >
-          <SelectTrigger className="w-[100px]">
-            <Palette className="h-4 w-4 mr-2" />
-            <SelectValue placeholder="Font Color" />
-          </SelectTrigger>
-          <SelectContent>
-            {fontColors.map(color => (
-              <SelectItem key={color} value={color}>
-                <div className="flex items-center">
-                  <div className="w-4 h-4 mr-2 rounded" style={{ backgroundColor: color }}></div>
-                  {color}
-                </div>
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
-
+      <Toolbar onFunction={handleFunction} />
       <div className="formula-bar p-2 border-b flex items-center gap-2">
         <span className="text-sm font-medium">fx</span>
         <input
