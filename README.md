@@ -1,6 +1,6 @@
-Vite React ShadCN TS Project
+sheetify-simulate
 
-Welcome to the Vite React ShadCN TS project! This repository contains a modern front-end setup using Vite, React, TypeScript, and a collection of essential libraries and tools to build robust applications.
+Welcome to the sheetify-simulate project! This repository contains a modern front-end setup using Vite, React, TypeScript, and a collection of essential libraries and tools to build robust applications.
 
 Project Overview
 
