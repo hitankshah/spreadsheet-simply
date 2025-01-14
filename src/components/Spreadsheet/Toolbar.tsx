@@ -11,7 +11,9 @@ import {
   Scissors,
   Type,
   Strikethrough,
-  Replace
+  Replace,
+  Undo2,
+  Redo2
 } from "lucide-react";
 import {
   Dialog,
@@ -25,9 +27,19 @@ import { Label } from "@/components/ui/label";
 
 interface ToolbarProps {
   onFunction: (type: string, params?: any) => void;
+  canUndo: boolean;
+  canRedo: boolean;
+  onUndo: () => void;
+  onRedo: () => void;
 }
 
-export const Toolbar: React.FC<ToolbarProps> = ({ onFunction }) => {
+export const Toolbar: React.FC<ToolbarProps> = ({ 
+  onFunction, 
+  canUndo, 
+  canRedo, 
+  onUndo, 
+  onRedo 
+}) => {
   const [findText, setFindText] = useState('');
   const [replaceText, setReplaceText] = useState('');
 
@@ -43,6 +55,27 @@ export const Toolbar: React.FC<ToolbarProps> = ({ onFunction }) => {
 
   return (
     <div className="p-2 bg-sheet-header border-b border-sheet-border flex items-center gap-2 flex-wrap">
+      <div className="flex items-center gap-2">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={onUndo}
+          disabled={!canUndo}
+        >
+          <Undo2 className="w-4 h-4" />
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={onRedo}
+          disabled={!canRedo}
+        >
+          <Redo2 className="w-4 h-4" />
+        </Button>
+      </div>
+
+      <Separator orientation="vertical" className="h-6" />
+
       <div className="flex items-center gap-2">
         <Button
           variant="outline"

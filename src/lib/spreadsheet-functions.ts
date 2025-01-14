@@ -10,17 +10,21 @@ export const calculateAverage = (values: string[]): number => {
 };
 
 export const findMax = (values: string[]): number => {
-  const numbers = values.filter(val => !isNaN(Number(val)));
-  return numbers.length > 0 ? Math.max(...numbers.map(Number)) : 0;
+  const numbers = values
+    .filter(val => !isNaN(Number(val)))
+    .map(Number);
+  return numbers.length > 0 ? Math.max(...numbers) : 0;
 };
 
 export const findMin = (values: string[]): number => {
-  const numbers = values.filter(val => !isNaN(Number(val)));
-  return numbers.length > 0 ? Math.min(...numbers.map(Number)) : 0;
+  const numbers = values
+    .filter(val => !isNaN(Number(val)))
+    .map(Number);
+  return numbers.length > 0 ? Math.min(...numbers) : 0;
 };
 
 export const count = (values: string[]): number => {
-  return values.filter(val => !isNaN(Number(val))).length;
+  return values.filter(val => val.trim() !== '').length;
 };
 
 export const trim = (value: string): string => {
