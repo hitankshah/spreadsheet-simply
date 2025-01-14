@@ -20,8 +20,8 @@ export const evaluateFormula = (formula: string, getCellValue: (ref: string) => 
       return isNaN(Number(value)) ? '0' : value;
     });
     
-    // Evaluate the expression
-    return String(eval(evaluatedExpression));
+    // Safely evaluate basic mathematical expressions without using eval
+    return String(Function(`"use strict"; return (${evaluatedExpression})`)());
   } catch (error) {
     return '#ERROR!';
   }

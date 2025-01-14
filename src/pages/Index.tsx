@@ -1,4 +1,4 @@
-import { Spreadsheet } from "@/components/Spreadsheet";
+import Spreadsheet from "@/components/Spreadsheet";
 
 const Index = () => {
   return <Spreadsheet />;
