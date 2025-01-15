@@ -182,9 +182,4 @@ Contributing
 
 Contributions are welcome! Please fork the repository and submit a pull request with your changes.
 
-Contact
-
-For any inquiries, please contact Hitank Shah at [your email address].
-
-Thank you for using this template! Happy coding!
 
